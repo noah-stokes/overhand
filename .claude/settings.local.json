@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"/c/Users/noahs/PycharmProjects/proofy\" && venv/Scripts/python -m pytest tests/test_processor.py -v 2>&1)",
+      "Bash(cd \"/c/Users/noahs/PycharmProjects/proofy\" && venv/Scripts/pip install pytest -q && venv/Scripts/python -m pytest tests/test_processor.py -v 2>&1)",
+      "Bash(cd \"/c/Users/noahs/PycharmProjects/proofy\" && venv/Scripts/pip install numpy pillow opencv-python -q 2>&1 | tail -5 && venv/Scripts/python -m pytest tests/test_processor.py -v 2>&1)",
+      "Bash(pip list:*)",
+      "Bash(python:*)",
+      "Bash(venv/Scripts/python.exe -c \"import dotenv, anthropic, pix2tex; print\\('ok'\\)\" 2>&1)",
+      "Bash(venv/Scripts/python -c \"\nfrom dotenv import load_dotenv\nload_dotenv\\(\\)\nfrom processor import preprocess_image\nfrom cleaner import ocr_to_latex\n\nwith open\\('tests/images/proof1.jpg', 'rb'\\) as f:\n    raw = f.read\\(\\)\n\nclean = preprocess_image\\(raw\\)\nprint\\('preprocessed, bytes:', len\\(clean\\)\\)\nresult = ocr_to_latex\\(clean, media_type='image/jpeg'\\)\nprint\\(result[:3000]\\)\n\")",
+      "Bash(venv/Scripts/python -c \"\nfrom dotenv import load_dotenv\nload_dotenv\\(\\)\nfrom processor import preprocess_image\nfrom cleaner import ocr_to_latex\n\nimages = [\n    \\('tests/images/setnotes.png', 'image/png'\\),\n    \\('tests/images/proof1.jpg',   'image/jpeg'\\),\n    \\('tests/images/proof2.jpg',   'image/jpeg'\\),\n    \\('tests/images/proof3.jpg',   'image/jpeg'\\),\n]\n\nfor path, mime in images:\n    print\\(f'=== {path} ==='\\)\n    with open\\(path, 'rb'\\) as f:\n        raw = f.read\\(\\)\n    clean = preprocess_image\\(raw\\)\n    result = ocr_to_latex\\(clean, media_type=mime\\)\n    print\\(result[:3000]\\)\n    print\\(\\)\n\")",
+      "Bash(venv/Scripts/python -c \"\nfrom dotenv import load_dotenv\nload_dotenv\\(\\)\nfrom processor import preprocess_image\nfrom cleaner import ocr_to_latex\n\nwith open\\('tests/images/setnotes.png', 'rb'\\) as f:\n    raw = f.read\\(\\)\nclean = preprocess_image\\(raw\\)\nprint\\('preprocessed bytes:', len\\(clean\\)\\)\nresult = ocr_to_latex\\(clean, media_type='image/png'\\)\nprint\\(repr\\(result\\)\\)\n\")",
+      "Bash(venv/Scripts/python -c \"\nfrom dotenv import load_dotenv\nload_dotenv\\(\\)\nimport base64, os, openai\nfrom processor import preprocess_image\n\nclient = openai.OpenAI\\(api_key=os.environ['OPENAI_API_KEY']\\)\n\nwith open\\('tests/images/setnotes.png', 'rb'\\) as f:\n    raw = f.read\\(\\)\nfrom processor import preprocess_image\nclean = preprocess_image\\(raw\\)\nb64 = base64.b64encode\\(clean\\).decode\\(\\)\n\nresp = client.chat.completions.create\\(\n    model='gpt-5',\n    max_completion_tokens=4096,\n    messages=[\n        {'role': 'user', 'content': [\n            {'type': 'text', 'text': 'What do you see in this image?'},\n            {'type': 'image_url', 'image_url': {'url': f'data:image/png;base64,{b64}'}}\n        ]}\n    ]\n\\)\nprint\\('finish_reason:', resp.choices[0].finish_reason\\)\nprint\\('content:', repr\\(resp.choices[0].message.content\\)\\)\n\")",
+      "Bash(venv/Scripts/python -c \"\nfrom dotenv import load_dotenv\nload_dotenv\\(\\)\nfrom processor import preprocess_image\nfrom cleaner import ocr_to_latex\n\nwith open\\('tests/images/setnotes.png', 'rb'\\) as f:\n    raw = f.read\\(\\)\nclean = preprocess_image\\(raw\\)\nresult = ocr_to_latex\\(clean, media_type='image/png'\\)\nwith open\\('setnotes_latex.txt', 'w', encoding='utf-8'\\) as out:\n    out.write\\(repr\\(result\\)\\)\nprint\\('done, length:', len\\(result\\)\\)\n\")",
+      "Bash(venv/Scripts/python -c \"\nfrom dotenv import load_dotenv\nload_dotenv\\(\\)\nimport base64, os, openai\nfrom processor import preprocess_image\nfrom cleaner import _SYSTEM_PROMPT\n\nclient = openai.OpenAI\\(api_key=os.environ['OPENAI_API_KEY']\\)\n\nwith open\\('tests/images/setnotes.png', 'rb'\\) as f:\n    raw = f.read\\(\\)\nclean = preprocess_image\\(raw\\)\nb64 = base64.b64encode\\(clean\\).decode\\(\\)\n\nresp = client.chat.completions.create\\(\n    model='gpt-5',\n    max_completion_tokens=4096,\n    messages=[\n        {'role': 'system', 'content': _SYSTEM_PROMPT},\n        {'role': 'user', 'content': [\n            {'type': 'image_url', 'image_url': {'url': f'data:image/png;base64,{b64}'}}\n        ]}\n    ]\n\\)\nwith open\\('setnotes_latex.txt', 'w', encoding='utf-8'\\) as out:\n    out.write\\('finish_reason: ' + resp.choices[0].finish_reason + '\\\\n'\\)\n    out.write\\('content:\\\\n' + \\(resp.choices[0].message.content or '\\(empty\\)'\\)\\)\nprint\\('done'\\)\n\")",
+      "Bash(venv/Scripts/pip list:*)",
+      "Bash(venv/Scripts/pytest test_compile.py -v)",
+      "Bash(where pdflatex:*)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Users/noahs/AppData/Local/Programs/MiKTeX/**)",
+      "Bash(export PATH=\"$PATH:/c/Users/noahs/AppData/Local/Programs/MiKTeX/miktex/bin/x64\")",
+      "Bash(pdflatex --version)",
+      "Bash(PATH=\"$PATH:/c/Users/noahs/AppData/Local/Programs/MiKTeX/miktex/bin/x64\" pdflatex --version 2>&1)",
+      "Bash(PATH=\"$PATH:/c/Users/noahs/AppData/Local/Programs/MiKTeX/miktex/bin/x64\" venv/Scripts/pytest test_compile.py -v)",
+      "Bash(venv/Scripts/python -m pytest tests/ test_compile.py -v 2>&1)",
+      "Bash(venv/Scripts/pip install:*)",
+      "Bash(venv/Scripts/python -m pytest tests/ test_compile.py -v)",
+      "Bash(ls -la /c/Users/noahs/PycharmProjects/proofy/*.txt /c/Users/noahs/PycharmProjects/proofy/*.md)",
+      "Read(//c/Users/noahs/PycharmProjects/**)",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(grep -E \"\\\\.\\(md|txt|yml|yaml|toml|cfg|conf|ini\\)$\")",
+      "Bash(grep -E '\\\\.\\(txt|toml|yaml|yml|cfg|ini|json\\)$')",
+      "Bash(find /c/Users/noahs/PycharmProjects/proofy -maxdepth 2 -type f -name *.txt -o -name *.toml -o -name *.cfg -o -name *.ini)",
+      "Bash(grep -h \"^import\\\\|^from\" /c/Users/noahs/PycharmProjects/proofy/*.py)",
+      "Bash(ls:*)"
+    ]
+  }
+}
