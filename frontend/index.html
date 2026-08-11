@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overhand — notes in, PDF out</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230c0c0c'/%3E%3Ctext x='16' y='24' font-family='Archivo,Helvetica,sans-serif' font-size='24' font-weight='900' fill='%23fff' text-anchor='middle'%3EO%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+
+<!-- =============================== AUTH =============================== -->
+<main class="screen" id="screen-auth" hidden>
+  <header class="site-header">
+    <span class="wordmark">Overhand</span>
+    <nav class="site-nav">
+      <a href="#" data-inert>Method</a>
+      <a href="#" data-inert>Pricing</a>
+      <a href="#" data-inert>Students</a>
+    </nav>
+  </header>
+
+  <div class="auth-body">
+    <div class="auth-copy">
+      <h1 class="hero-title">Sign in<br>to start.</h1>
+      <p class="hero-lede">Overhand keeps your page count against your Google account. One tap, no password to invent.</p>
+    </div>
+    <div class="auth-panel">
+      <span class="auth-label">Continue with</span>
+      <div id="g-signin"></div>
+      <p class="auth-note" id="auth-note">Google sign-in is loading…</p>
+    </div>
+  </div>
+</main>
+
+<!-- ============================== UPLOAD ============================== -->
+<main class="screen" id="screen-upload" hidden>
+  <header class="site-header">
+    <span class="wordmark">Overhand</span>
+    <nav class="site-nav">
+      <a href="#" data-inert>Method</a>
+      <a href="#" data-inert>Pricing</a>
+      <a href="#" data-inert>Students</a>
+      <span class="user-chip" id="user-chip">
+        <img class="user-avatar" id="user-avatar" alt="" hidden>
+        <span class="user-email" id="user-email"></span>
+        <span class="user-usage" id="user-usage"></span>
+        <button class="linkish" id="sign-out">sign out</button>
+      </span>
+    </nav>
+  </header>
+
+  <div class="upload-body">
+    <div class="hero">
+      <h1 class="hero-title">Notes<br>in, PDF<br>out.</h1>
+      <div class="hero-side">
+        <p class="hero-lede">Shoot the page. Get a typeset document with the structure your lecturer actually dictated.</p>
+        <ol class="hero-steps">
+          <li>01 Upload</li>
+          <li>02 Read</li>
+          <li>03 Typeset</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="upload-grid">
+      <div class="dropzone-cell">
+        <div class="dropzone" id="dropzone">
+          <div class="note-swatch"><span>note photo</span></div>
+          <div class="dropzone-copy">
+            <span class="dropzone-title">Drop photos<br>anywhere</span>
+            <span class="dropzone-sub">JPG, PNG, HEIC — up to 40 pages, any order.</span>
+            <div class="dropzone-actions">
+              <button class="btn btn-blue" id="choose-photos">Choose photos</button>
+              <button class="btn btn-outline" id="try-sample">Try a sample</button>
+            </div>
+            <span class="dropzone-hint">or paste from the clipboard — ⌘V</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-cell">
+        <div class="stat">
+          <span class="stat-figure">40s</span>
+          <span class="stat-label">Per page, average</span>
+        </div>
+        <div class="stat">
+          <span class="stat-figure">98.2%</span>
+          <span class="stat-label">Cursive accuracy</span>
+        </div>
+        <div class="stat stat-blue">
+          <span class="stat-serif" id="stat-quota">Pages included with your account.</span>
+          <span class="stat-label" id="stat-quota-label">Signed in →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ============================ PROCESSING ============================ -->
+<main class="screen" id="screen-processing" hidden>
+  <header class="site-header">
+    <span class="wordmark">Overhand</span>
+    <button class="btn btn-outline btn-sm" id="cancel-processing">Cancel</button>
+  </header>
+
+  <div class="processing-body">
+    <div class="processing-head">
+      <h2 class="processing-title" id="processing-title">Reading<br>page 1</h2>
+      <p class="processing-lede">Preprocessing the photo, transcribing the handwriting, then typesetting it. Roughly forty seconds a page.</p>
+    </div>
+    <ol class="job-list" id="job-list"></ol>
+  </div>
+</main>
+
+<!-- ============================== RESULT ============================== -->
+<main class="screen" id="screen-result" hidden>
+  <header class="doc-header">
+    <div class="doc-id">
+      <span class="wordmark wordmark-sm">Overhand</span>
+      <span class="doc-title" id="doc-title" contenteditable="plaintext-only" spellcheck="false"></span>
+      <span class="pp-badge" id="pp-badge">0 pp</span>
+    </div>
+    <div class="doc-actions">
+      <button class="btn btn-outline btn-sm" id="new-doc">New</button>
+      <button class="btn btn-outline btn-sm" id="copy-tex">Copy TeX</button>
+      <div class="split">
+        <button class="btn btn-blue btn-sm" id="download-pdf">Download PDF</button>
+        <button class="btn btn-blue btn-sm btn-caret" id="format-toggle" aria-label="Other formats">▾</button>
+        <div class="format-menu" id="format-menu" hidden>
+          <button data-fmt="pdf">PDF</button>
+          <button data-fmt="docx">Word .docx</button>
+          <button data-fmt="md">Markdown</button>
+          <button data-fmt="png">PNG</button>
+          <button data-fmt="tex">LaTeX source</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="workspace">
+    <section class="stage">
+      <div class="page-holder">
+        <iframe class="page-frame" id="page-frame" title="Compiled document"></iframe>
+        <div class="stage-empty" id="stage-empty">Compiling…</div>
+      </div>
+      <div class="thumb-rail" id="thumb-rail"></div>
+    </section>
+
+    <aside class="chat">
+      <div class="chat-head">
+        <span class="chat-head-title">Edit by asking</span>
+        <span class="chat-version">
+          <span id="version-label">v1</span>
+          <button class="linkish" id="undo-btn" disabled>undo</button>
+        </span>
+      </div>
+
+      <div class="chat-log" id="chat-log"></div>
+
+      <div class="chat-chips" id="chat-chips">
+        <button data-chip="Tighten the bullets">Tighten bullets</button>
+        <button data-chip="Set the document in two columns">Two columns</button>
+        <button data-chip="Expand section 2 with more detail">Expand §2</button>
+      </div>
+
+      <form class="chat-input" id="chat-form">
+        <textarea id="chat-text" rows="1" placeholder="Type an edit…" autocomplete="off"></textarea>
+        <button type="submit" class="send" id="chat-send" aria-label="Send">↑</button>
+      </form>
+    </aside>
+  </div>
+</main>
+
+<div class="drop-veil" id="drop-veil" hidden><span>Drop to upload</span></div>
+<div class="toast-stack" id="toast-stack"></div>
+
+<input type="file" id="file-input" accept="image/*" multiple hidden>
+
+<script src="app.js"></script>
+</body>
+</html>

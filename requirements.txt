@@ -1,0 +1,22 @@
+# pipeline
+fastapi
+uvicorn[standard]
+python-multipart
+python-dotenv
+openai
+pillow
+opencv-python
+numpy
+scikit-learn  # detector.py only
+
+# users + postgres
+sqlalchemy>=2.0
+alembic
+psycopg[binary]
+# [requests] pulls the transport google.auth.transport.requests needs.
+google-auth[requests]
+itsdangerous
+
+# tests
+pytest
+httpx

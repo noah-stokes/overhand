@@ -1,0 +1,14 @@
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# secrets
+.env
+
+# latex / export scratch
+*.aux
+*.log
+*.out
