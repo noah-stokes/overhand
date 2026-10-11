@@ -14,6 +14,16 @@ Built with **Python · FastAPI · GPT-5 vision · OpenCV · PostgreSQL · vanill
 
 ## Demo
 
+### LaTeX preview and chatbot editor
+
+![Overhand editor showing typeset set-theory notes beside a chat request to add a title and align equations](docs/images/editor.png)
+
+The document workspace pairs a compiled LaTeX preview with conversational edits,
+version history, and export controls. This screenshot uses a compiled sample
+document and a scripted conversation in the actual frontend.
+
+[Sample LaTeX source](docs/demo/set-notes.tex) · [Compiled PDF](docs/demo/set-notes.pdf)
+
 ### Upload workspace
 
 ![Overhand upload screen with photo selection, sample upload, and account page allowance](docs/images/upload.png)
