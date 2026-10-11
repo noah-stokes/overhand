@@ -10,7 +10,38 @@ mistakes and notation choices.
 
 Built with **Python · FastAPI · GPT-5 vision · OpenCV · PostgreSQL · vanilla JavaScript**.
 
-[Features](#features) · [Architecture](#architecture) · [Setup](#setup) · [Tests](#tests) · [API](#api)
+[Demo](#demo) · [Features](#features) · [Architecture](#architecture) · [Setup](#setup) · [Tests](#tests) · [API](#api)
+
+## Demo
+
+### Upload workspace
+
+![Overhand upload screen with photo selection, sample upload, and account page allowance](docs/images/upload.png)
+
+The actual frontend rendered with demo account data. The speed and accuracy figures
+shown in the UI are illustrative copy, not measured results.
+
+### Sample handwritten pages
+
+These photos are included in the repository and can be uploaded when running the
+app locally. Choose **Try a sample** to load the set-theory notes directly.
+
+<table>
+  <tr>
+    <th>Handwritten proof</th>
+    <th>Set-theory notes</th>
+  </tr>
+  <tr>
+    <td><a href="tests/images/proof1.jpg"><img src="tests/images/proof1.jpg" width="400" alt="Photograph of a handwritten proof by contradiction with equations on lined notebook paper"></a></td>
+    <td><a href="frontend/assets/sample.png"><img src="frontend/assets/sample.png" width="400" alt="Handwritten set-theory notes with set notation, colored annotations, and Venn diagrams"></a></td>
+  </tr>
+  <tr>
+    <td>Proof by contradiction; used by the live integration tests.</td>
+    <td>Definitions, set notation, and diagrams; used by the in-app sample.</td>
+  </tr>
+</table>
+
+[Download proof photo](tests/images/proof1.jpg) · [Download set-theory notes](frontend/assets/sample.png)
 
 ## Features
 
